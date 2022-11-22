@@ -1,3 +1,4 @@
+import 'package:app/module/transactions_histroty_item.dart';
 import 'package:flutter/material.dart';
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:get/get.dart';
@@ -14,10 +15,8 @@ class HomePage extends StatelessWidget {
           children: [
             title,
             //TODO: firebase calculate total
-            Text(
-              "${amount}",
-              style: UI.text(fontSize, UI.white, FontWeight.w700),
-            )
+
+            UI.text(amount, fontSize, FontWeight.w700, UI.white)
           ],
         ),
       );
@@ -44,10 +43,8 @@ class HomePage extends StatelessWidget {
                       children: [
                         Container(
                           margin: const EdgeInsets.only(right: 6),
-                          child: Text(
-                            "Total Balance",
-                            style: UI.text(16, UI.white, FontWeight.w600),
-                          ),
+                          child: UI.text(
+                              "Total Balance", 16, FontWeight.w600, UI.white),
                         ),
                         SizedBox(
                           width: 12,
@@ -74,7 +71,7 @@ class HomePage extends StatelessWidget {
                 )
               ],
             ),
-            const SizedBox(height: 50),
+            const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -92,10 +89,7 @@ class HomePage extends StatelessWidget {
                             color: UI.white,
                           ),
                         ),
-                        Text(
-                          "Income",
-                          style: UI.text(16, UI.white, FontWeight.w600),
-                        ),
+                        UI.text("Income", 16, FontWeight.w600, UI.white)
                       ],
                     ),
                     "18840",
@@ -113,10 +107,7 @@ class HomePage extends StatelessWidget {
                             color: UI.white,
                           ),
                         ),
-                        Text(
-                          "Expenses",
-                          style: UI.text(16, UI.white, FontWeight.w600),
-                        ),
+                        UI.text("Expenses", 16, FontWeight.w600, UI.white)
                       ],
                     ),
                     "284",
@@ -135,8 +126,8 @@ class HomePage extends StatelessWidget {
           UI.topBackground(),
           Container(
             padding: const EdgeInsets.fromLTRB(24, 30, 24, 8),
-            height: 80,
-            width: UI.W(context),
+            height: 40,
+            width: UI.W(context) - 50,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -144,23 +135,9 @@ class HomePage extends StatelessWidget {
                 Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        "Good afternoon,",
-                        style: UI.text(14, UI.white, FontWeight.w500),
-                        textAlign: TextAlign.left,
-                      ),
-                    ),
+                    UI.text("Good afternoon,", 14, FontWeight.w500, UI.white),
+                    UI.text("Enjelin Morgeana", 20, FontWeight.w600, UI.white),
                     //TODO: firebase get username
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        "Enjelin Morgeana",
-                        style: UI.text(20, UI.white, FontWeight.w600),
-                        textAlign: TextAlign.left,
-                      ),
-                    ),
                   ],
                 ),
                 //TODO: notifcation button
@@ -181,8 +158,31 @@ class HomePage extends StatelessWidget {
             ),
           ),
           Align(
-            alignment: const Alignment(0, -0.5),
-            child: card(),
+            alignment: const Alignment(0, -0.4),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24),
+              child: Container(
+                height: UI.W(context) - 150,
+                child: Column(
+                  children: [
+                    card(),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          UI.text("Transactions History", 16, FontWeight.w600,
+                              UI.black),
+                          UI.text("See all", 14, FontWeight.w400, UI.secondary),
+                        ],
+                      ),
+                    ), //TODO : firebase lite orj irne
+                    TransactionsHistoryItem(),
+                  ],
+                ),
+              ),
+            ),
           )
         ],
       ),

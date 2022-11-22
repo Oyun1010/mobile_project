@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class ConnectWallet extends StatelessWidget {
+class BillPayment extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container();

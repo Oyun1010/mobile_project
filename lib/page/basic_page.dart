@@ -1,4 +1,5 @@
 import 'package:app/page/home_page.dart';
+import 'package:app/page/wallet.dart';
 import 'package:flutter/material.dart';
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:get/get.dart';
@@ -13,6 +14,8 @@ class BasicPageState extends State<BasicPage> {
   int bottomNavIndex = 0;
   List<Widget> widgetOptions = <Widget>[
     HomePage(),
+    HomePage(),
+    Wallet(),
   ];
 
   @override
@@ -42,7 +45,9 @@ class BasicPageState extends State<BasicPage> {
           ),
           //params
         ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        floatingActionButtonLocation: bottomNavIndex == 0
+            ? FloatingActionButtonLocation.centerDocked
+            : null,
         bottomNavigationBar: AnimatedBottomNavigationBar(
           icons: const [
             Icons.home,

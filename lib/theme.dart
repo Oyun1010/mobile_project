@@ -6,6 +6,12 @@ class UI {
   static Color jungleGreen = const Color.fromRGBO(67, 136, 131, 1);
   static Color grey = const Color.fromRGBO(68, 68, 68, 1);
   static Color ligthgrey = const Color.fromRGBO(170, 170, 170, 1);
+  static Color black = const Color.fromRGBO(34, 34, 34, 1);
+  static Color secondary = const Color.fromRGBO(102, 102, 102, 1);
+  static Color bWhite = const Color.fromRGBO(240, 246, 245, 1);
+  static Color green = const Color.fromRGBO(37, 169, 105, 1);
+  static Color red = const Color.fromRGBO(249, 91, 81, 1);
+  static Color greenWhite = const Color.fromRGBO(236, 249, 248, 1);
 
   static W(BuildContext context) {
     return MediaQuery.of(context).size.width;
@@ -15,7 +21,7 @@ class UI {
     return MediaQuery.of(context).size.height;
   }
 
-  static text(double fontSize, Color color, FontWeight fontWeight) {
+  static textStyle(double fontSize, Color color, FontWeight fontWeight) {
     return GoogleFonts.inter(
         textStyle: TextStyle(
             fontWeight: fontWeight,
@@ -24,9 +30,24 @@ class UI {
             decoration: TextDecoration.none));
   }
 
+  static Widget text(
+      String text, double fontSize, FontWeight fontWeight, Color color) {
+    return Align(
+      alignment: Alignment.centerLeft,
+      child: Container(
+        padding: const EdgeInsets.only(bottom: 4),
+        child: Text(
+          text,
+          style: UI.textStyle(fontSize, color, fontWeight),
+          textAlign: TextAlign.left,
+        ),
+      ),
+    );
+  }
+
   static LinearGradient linearGradient() {
     return const LinearGradient(
-      begin: Alignment.topLeft,
+      begin: Alignment.topCenter,
       end: Alignment.bottomCenter,
       colors: <Color>[
         Color.fromRGBO(99, 181, 175, 1),
@@ -47,7 +68,6 @@ class UI {
           bottomRight: Radius.circular(15),
         ),
       ),
-      child: Text("lll"),
     );
   }
 
@@ -71,7 +91,7 @@ class UI {
           alignment: Alignment.center,
           child: Text(
             text,
-            style: UI.text(18, color, FontWeight.w600),
+            style: UI.textStyle(18, color, FontWeight.w600),
           ),
         ),
       ),

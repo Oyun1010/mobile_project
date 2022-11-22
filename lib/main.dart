@@ -1,5 +1,9 @@
+import 'package:app/module/bill_details.dart';
+import 'package:app/module/bill_payment.dart';
+import 'package:app/module/connect_wallet.dart';
 import 'package:app/page/basic_page.dart';
 import 'package:app/page/home_page.dart';
+import 'package:app/page/wallet.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
@@ -23,6 +27,10 @@ class MyApp extends StatelessWidget {
         GetPage(name: '/', page: () => MyHomePage()),
         GetPage(name: '/basic', page: () => BasicPage()),
         GetPage(name: '/home', page: () => HomePage()),
+        GetPage(name: '/wallet', page: () => Wallet()),
+        GetPage(name: '/connectWallet', page: () => ConnectWallet()),
+        GetPage(name: '/billDetails', page: () => BillDetails()),
+        GetPage(name: '/billPayment', page: () => BillPayment()),
         // GetPage(name: '/wallet', page: () => Waller)
       ],
       initialRoute: '/',
@@ -45,10 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
       decoration: BoxDecoration(
         gradient: UI.linearGradient(),
       ),
-      child: Text(
-        "mono",
-        style: UI.text(50, UI.white, FontWeight.bold),
-      ),
+      child: UI.text("mono", 50, FontWeight.bold, UI.white),
     );
   }
 
@@ -80,7 +85,7 @@ class _MyHomePageState extends State<MyHomePage> {
             padding: const EdgeInsets.symmetric(vertical: 26),
             child: Text(
               "Spend Smarter Save More",
-              style: UI.text(
+              style: UI.textStyle(
                 36,
                 UI.jungleGreen,
                 FontWeight.bold,
@@ -98,14 +103,8 @@ class _MyHomePageState extends State<MyHomePage> {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisSize: MainAxisSize.max,
               children: [
-                Text(
-                  "Already Have Account? ",
-                  style: UI.text(14, UI.grey, FontWeight.w500),
-                ),
-                Text(
-                  "Login",
-                  style: UI.text(14, UI.jungleGreen, FontWeight.w500),
-                ),
+                UI.text("Already Have Account?", 14, FontWeight.w500, UI.grey),
+                UI.text("Login", 14, FontWeight.w500, UI.jungleGreen),
               ],
             ),
           )
