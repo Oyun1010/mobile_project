@@ -61,58 +61,48 @@ class SuccessFully extends StatelessWidget {
     }
 
     Widget transactionDetails() {
-      return Container(
-        child: Column(
-          children: [
-            tDetailsRow(
-              "Transaction details",
-              UI.dark,
-              SizedBox(
-                width: 20,
-                height: 20,
-                child: Icon(
-                  Ionicons.chevron_up,
-                  size: 20,
-                  color: UI.darkGrey,
-                ),
-              ),
+      return Column(
+        children: [
+          tDetailsRow(
+            "Transaction details",
+            UI.dark,
+            SizedBox(
+              width: 20,
+              height: 20,
+              child: Icon(Ionicons.chevron_up, size: 20, color: UI.darkGrey),
             ),
-            tDetailsRow(
-              "Payment method",
-              UI.secondary,
-              UI.text("Debit Card", 16, FontWeight.w500, UI.dark),
+          ),
+          tDetailsRow(
+            "Payment method",
+            UI.secondary,
+            UI.text("Debit Card", 16, FontWeight.w500, UI.dark),
+          ),
+          tDetailsRow(
+            "Status",
+            UI.secondary,
+            UI.text("Completed", 16, FontWeight.w500, UI.jungleGreen),
+          ),
+          tDetailsRow(
+            "Time",
+            UI.secondary,
+            UI.text("08:15 AM", 16, FontWeight.w500, UI.dark),
+          ),
+          tDetailsRow(
+            "Date",
+            UI.secondary,
+            UI.text("Feb 28, 2022", 16, FontWeight.w500, UI.dark),
+          ),
+          tDetailsRow(
+            "Transaction ID",
+            UI.secondary,
+            Row(
+              children: [
+                UI.text("2092913832472.. ", 16, FontWeight.w500, UI.dark),
+                Icon(Ionicons.copy, size: 24, color: UI.jungleGreen)
+              ],
             ),
-            tDetailsRow(
-              "Status",
-              UI.secondary,
-              UI.text("Completed", 16, FontWeight.w500, UI.jungleGreen),
-            ),
-            tDetailsRow(
-              "Time",
-              UI.secondary,
-              UI.text("08:15 AM", 16, FontWeight.w500, UI.dark),
-            ),
-            tDetailsRow(
-              "Date",
-              UI.secondary,
-              UI.text("Feb 28, 2022", 16, FontWeight.w500, UI.dark),
-            ),
-            tDetailsRow(
-              "Transaction ID",
-              UI.secondary,
-              Row(
-                children: [
-                  UI.text("2092913832472.. ", 16, FontWeight.w500, UI.dark),
-                  Icon(
-                    Ionicons.copy,
-                    size: 24,
-                    color: UI.jungleGreen,
-                  )
-                ],
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       );
     }
 
@@ -140,11 +130,8 @@ class SuccessFully extends StatelessWidget {
                     borderRadius: BorderRadius.circular(50),
                     color: UI.bWhite,
                   ),
-                  child: Icon(
-                    Ionicons.checkmark_circle,
-                    color: UI.jungleGreen,
-                    size: 40,
-                  )),
+                  child: Icon(Ionicons.checkmark_circle,
+                      color: UI.jungleGreen, size: 40)),
               UI.text(
                   "Payment Successfully", 22, FontWeight.w600, UI.jungleGreen,
                   alignment: Alignment.center, textAlign: TextAlign.center),

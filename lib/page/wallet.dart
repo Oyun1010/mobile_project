@@ -1,9 +1,9 @@
-import 'package:app/module/pay_item.dart';
-import 'package:app/module/transactions_item.dart';
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 import 'package:get/get.dart';
+import '../module/pay_item.dart';
+import '../module/transactions_item.dart';
 import '../theme.dart';
 
 class WalletContoller extends GetxController {
@@ -84,32 +84,23 @@ class Wallet extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Container(
+                    SizedBox(
                       width: 200,
                       child: UI.text(
-                        "Total Balance",
-                        16,
-                        FontWeight.w400,
-                        UI.secondary,
-                        alignment: Alignment.center,
-                      ),
+                          "Total Balance", 16, FontWeight.w400, UI.secondary,
+                          alignment: Alignment.center),
                     ),
                     const SizedBox(height: 6),
                     //TODO: une dynamic bna.
                     SizedBox(
                       width: 200,
-                      child: UI.text(
-                        "2.948.00",
-                        30,
-                        FontWeight.w700,
-                        UI.black,
-                        alignment: Alignment.center,
-                      ),
+                      child: UI.text("2.948.00", 30, FontWeight.w700, UI.black,
+                          alignment: Alignment.center),
                     ),
                   ],
                 ),
               ),
-              Container(
+              SizedBox(
                 width: UI.W(context) - 50,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,

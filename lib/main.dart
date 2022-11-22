@@ -49,7 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Widget body() {
-    return Container(
+    return SizedBox(
       width: UI.W(context),
       child: Column(
         children: [

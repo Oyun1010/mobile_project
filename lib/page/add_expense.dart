@@ -21,38 +21,37 @@ class AddExpense extends StatelessWidget {
   Widget textFeild(TextEditingController controller, String hintText,
       {Widget? suffix, bool isSuffix = false}) {
     return Container(
-        width: 318,
-        child: TextField(
-          controller: controller,
-          style: UI.textStyle(14, UI.jungleGreen, FontWeight.w600),
-          onChanged: ((value) {
-            if (controller.text.isNotEmpty) {
-              ctrl.showClear.value = true;
-            } else {
-              ctrl.showClear.value = false;
-            }
-          }),
-          decoration: InputDecoration(
-            hintText: hintText,
-            contentPadding:
-                const EdgeInsets.symmetric(horizontal: 12, vertical: 0),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(5),
-              borderSide: BorderSide(color: UI.borderColor),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(5),
-              borderSide: BorderSide(color: UI.jungleGreen),
-            ),
-            // suffixIcon: Obx(() => ctrl.showClear.value ? suffix! : Container())
-
-            suffixIcon: isSuffix
-                ? suffix
-                : Obx(
-                    () => (ctrl.showClear.value ? suffix! : const SizedBox()),
-                  ),
+      width: 318,
+      child: TextField(
+        controller: controller,
+        style: UI.textStyle(14, UI.jungleGreen, FontWeight.w600),
+        onChanged: ((value) {
+          if (controller.text.isNotEmpty) {
+            ctrl.showClear.value = true;
+          } else {
+            ctrl.showClear.value = false;
+          }
+        }),
+        decoration: InputDecoration(
+          hintText: hintText,
+          contentPadding:
+              const EdgeInsets.symmetric(horizontal: 12, vertical: 0),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(5),
+            borderSide: BorderSide(color: UI.borderColor),
           ),
-        ));
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(5),
+            borderSide: BorderSide(color: UI.jungleGreen),
+          ),
+          suffixIcon: isSuffix
+              ? suffix
+              : Obx(
+                  () => (ctrl.showClear.value ? suffix! : const SizedBox()),
+                ),
+        ),
+      ),
+    );
   }
 
   @override
@@ -73,11 +72,7 @@ class AddExpense extends StatelessWidget {
             textFeild(
               amount,
               "Name",
-              suffix: Icon(
-                Ionicons.chevron_down,
-                color: UI.darkGrey,
-                size: 20,
-              ),
+              suffix: Icon(Ionicons.chevron_down, color: UI.darkGrey, size: 20),
               isSuffix: true,
             ),
             title("Amount"),
@@ -88,24 +83,24 @@ class AddExpense extends StatelessWidget {
                 width: 30,
                 height: 18,
                 child: ElevatedButton(
-                    onPressed: () {
-                      //TODO:
-                      amount.clear();
-                      ctrl.showClear.value = false;
-                    },
-                    style: UI.buttonStyle(Colors.transparent),
-                    child:
-                        UI.text("Clear", 12, FontWeight.w500, UI.jungleGreen)),
+                  onPressed: () {
+                    //TODO:
+                    amount.clear();
+                    ctrl.showClear.value = false;
+                  },
+                  style: UI.buttonStyle(Colors.transparent),
+                  child: UI.text("Clear", 12, FontWeight.w500, UI.jungleGreen),
+                ),
               ),
             ),
             title("DATE"),
-            textFeild(
-              dateTime,
-              "Tue, 22 Feb 2022",
-              suffix:
-                  Icon(Ionicons.calendar_clear, color: UI.darkGrey, size: 20),
-              isSuffix: true,
-            ),
+            textFeild(dateTime, "Tue, 22 Feb 2022",
+                suffix: Icon(
+                  Ionicons.calendar_clear,
+                  color: UI.darkGrey,
+                  size: 20,
+                ),
+                isSuffix: true),
             title("INVOICE"),
             Container(
               width: 318,
@@ -119,14 +114,10 @@ class AddExpense extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     //TODO:
-                    Icon(
-                      Ionicons.add_circle,
-                      size: 20,
-                      color: UI.secondary,
-                    ),
+                    Icon(Ionicons.add_circle, size: 20, color: UI.secondary),
                     const SizedBox(width: 12),
                     UI.text("Add Invoice", 14, FontWeight.w500, UI.secondary,
-                        alignment: Alignment.center)
+                        alignment: Alignment.center),
                   ],
                 ),
               ),
@@ -138,7 +129,7 @@ class AddExpense extends StatelessWidget {
 
     return SingleChildScrollView(
       child: Container(
-        // backgroundColor: UI.white,
+        color: UI.white,
         child: Stack(
           children: [
             UI.topBackground(),

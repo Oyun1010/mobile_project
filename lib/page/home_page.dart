@@ -1,9 +1,7 @@
-import 'package:app/module/transactions_item.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
+import '../module/transactions_item.dart';
 import '../theme.dart';
 
 class HomePageController extends GetxController {}
@@ -12,15 +10,12 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Widget cardItem(Widget title, String amount, double fontSize) {
-      return Container(
-        child: Column(
-          children: [
-            title,
-            //TODO: firebase calculate total
-
-            UI.text(amount, fontSize, FontWeight.w700, UI.white)
-          ],
-        ),
+      return Column(
+        children: [
+          title,
+          //TODO: firebase calculate total
+          UI.text(amount, fontSize, FontWeight.w700, UI.white)
+        ],
       );
     }
 
@@ -51,12 +46,9 @@ class HomePage extends StatelessWidget {
                         SizedBox(
                           width: 12,
                           height: 12,
-                          child: Icon(
-                            Ionicons.chevron_up,
-                            size: 10,
-                            color: UI.white,
-                          ),
-                        )
+                          child: Icon(Ionicons.chevron_up,
+                              size: 10, color: UI.white),
+                        ),
                       ],
                     ),
                     "18840",
@@ -65,11 +57,8 @@ class HomePage extends StatelessWidget {
                 Container(
                   height: 21,
                   width: 21,
-                  child: Icon(
-                    Ionicons.ellipsis_horizontal,
-                    size: 20,
-                    color: UI.white,
-                  ),
+                  child: Icon(Ionicons.ellipsis_horizontal,
+                      size: 20, color: UI.white),
                 )
               ],
             ),
@@ -86,11 +75,8 @@ class HomePage extends StatelessWidget {
                           width: 24,
                           height: 24,
                           margin: const EdgeInsets.only(right: 6),
-                          child: Icon(
-                            Ionicons.arrow_down_outline,
-                            size: 20,
-                            color: UI.white,
-                          ),
+                          child: Icon(Ionicons.arrow_down_outline,
+                              size: 20, color: UI.white),
                         ),
                         UI.text("Income", 16, FontWeight.w600, UI.white)
                       ],
@@ -105,11 +91,8 @@ class HomePage extends StatelessWidget {
                         width: 24,
                         height: 24,
                         margin: const EdgeInsets.only(right: 6),
-                        child: Icon(
-                          Ionicons.arrow_up_outline,
-                          size: 20,
-                          color: UI.white,
-                        ),
+                        child: Icon(Ionicons.arrow_up_outline,
+                            size: 20, color: UI.white),
                       ),
                       UI.text("Expenses", 16, FontWeight.w600, UI.white)
                     ],
@@ -145,12 +128,7 @@ class HomePage extends StatelessWidget {
         height: 62,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(50),
-          child: Image.asset(
-            img,
-            width: 62,
-            height: 62,
-            fit: BoxFit.cover,
-          ),
+          child: Image.asset(img, width: 62, height: 62, fit: BoxFit.cover),
         ),
       );
     }
@@ -162,24 +140,22 @@ class HomePage extends StatelessWidget {
           UI.topBackground(),
           Container(
             padding: const EdgeInsets.fromLTRB(20, 30, 20, 8),
+            margin: const EdgeInsets.only(top: 20),
             height: 80,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Expanded(
-                  child: Container(
-                    width: 250,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        UI.text(
-                            "Good afternoon,", 14, FontWeight.w500, UI.white),
-                        UI.text(
-                            "Enjelin Morgeana", 20, FontWeight.w600, UI.white),
-                        //TODO: firebase get username
-                      ],
-                    ),
+                SizedBox(
+                  width: 250,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      UI.text("Good afternoon,", 14, FontWeight.w500, UI.white),
+                      UI.text(
+                          "Enjelin Morgeana", 20, FontWeight.w600, UI.white),
+                      //TODO: firebase get username
+                    ],
                   ),
                 ),
                 //TODO: notifcation button
@@ -189,11 +165,8 @@ class HomePage extends StatelessWidget {
                   child: ElevatedButton(
                     onPressed: () {},
                     style: UI.buttonStyle(Colors.transparent),
-                    child: Icon(
-                      Ionicons.notifications_outline,
-                      size: 24,
-                      color: UI.white,
-                    ),
+                    child: Icon(Ionicons.notifications_outline,
+                        size: 24, color: UI.white),
                   ),
                 )
               ],
@@ -209,8 +182,7 @@ class HomePage extends StatelessWidget {
                   children: [
                     card(),
                     title("Transactions History"),
-                    //TODO : firebase list orj irne
-
+                    //TODO : firebase list eer guigene
                     TransactionsItem(),
                     TransactionsItem(),
                     TransactionsItem(),

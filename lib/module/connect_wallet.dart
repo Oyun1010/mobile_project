@@ -18,16 +18,16 @@ class ConnectWallet extends StatelessWidget {
   Widget build(BuildContext context) {
     ConnectWalletController ctrl = Get.put(ConnectWalletController());
 
-    Widget textField(TextEditingController controller, String label,
-        String hintText, double width) {
-      return Container(
+    Widget textField(
+        TextEditingController controller, String label, double width) {
+      return SizedBox(
         width: width,
         height: 54,
         child: TextField(
           controller: controller,
+          style: UI.textStyle(14, UI.jungleGreen, FontWeight.w500),
           decoration: InputDecoration(
             labelText: label,
-            hintText: hintText,
             labelStyle: UI.textStyle(12, UI.secondary, FontWeight.w400),
             contentPadding:
                 const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
@@ -84,19 +84,19 @@ class ConnectWallet extends StatelessWidget {
               UI.secondary,
             ),
           ),
-          textField(name_cart, "NAME ON CARD", "IRVAN MOSES", 364),
+          textField(name_cart, "NAME ON CARD", 364),
           Row(
             children: [
-              textField(name_cart, "", "DEBIT CARD NUMBER", 220),
+              textField(name_cart, "DEBIT CARD NUMBER", 220),
               const SizedBox(width: 11),
-              textField(name_cart, "", "CVC", 133),
+              textField(name_cart, "CVC", 133),
             ],
           ),
           Row(
             children: [
-              textField(name_cart, "", "EXPIRATION MM/YY", 220),
+              textField(name_cart, "EXPIRATION MM/YY", 220),
               const SizedBox(width: 11),
-              textField(name_cart, "", "ZIP", 133),
+              textField(name_cart, "ZIP", 133),
             ],
           ),
         ],
@@ -184,36 +184,68 @@ class ConnectWallet extends StatelessWidget {
     }
 
     Widget accounts() {
-      return Container(
-        child: Column(
-          children: [
-            accountItem(Icons.comment_bank, "Bank Link",
-                "Connect your bank account to deposit & fund", 0, ctrl.bank),
-            accountItem(CupertinoIcons.bitcoin_circle_fill, "Microdeposits",
-                "Connect bank in 5-7 days", 1, ctrl.micro),
-            accountItem(Icons.paypal, "Paypal", "Connect you paypal account", 2,
-                ctrl.payPal),
-            const SizedBox(height: 24),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Container(
-                width: 358,
-                height: 64,
-                child: ElevatedButton(
-                  onPressed: () {
-                    //TODO:
-                    Navigator.pushNamed(context, '/billDetails');
-                  },
-                  style: UI.buttonStyle(
-                    UI.white,
-                    side: BorderSide(color: UI.jungleGreen),
-                  ),
-                  child: UI.text("Next", 18, FontWeight.w600, UI.jungleGreen,
-                      alignment: Alignment.center),
+      return Column(
+        children: [
+          accountItem(Icons.comment_bank, "Bank Link",
+              "Connect your bank account to deposit & fund", 0, ctrl.bank),
+          accountItem(CupertinoIcons.bitcoin_circle_fill, "Microdeposits",
+              "Connect bank in 5-7 days", 1, ctrl.micro),
+          accountItem(Icons.paypal, "Paypal", "Connect you paypal account", 2,
+              ctrl.payPal),
+          const SizedBox(height: 24),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: SizedBox(
+              width: 358,
+              height: 64,
+              child: ElevatedButton(
+                onPressed: () {
+                  //TODO:
+                  Navigator.pushNamed(context, '/billDetails');
+                },
+                style: UI.buttonStyle(
+                  UI.white,
+                  side: BorderSide(color: UI.jungleGreen),
                 ),
+                child: UI.text("Next", 18, FontWeight.w600, UI.jungleGreen,
+                    alignment: Alignment.center),
               ),
-            )
+            ),
+          )
+        ],
+      );
+    }
+
+    Widget toggleSwitch() {
+      return Container(
+        width: 334,
+        height: 48,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(40),
+          color: UI.whiteGrey,
+        ),
+        margin: const EdgeInsets.symmetric(vertical: 12),
+        padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 4),
+        child: ToggleSwitch(
+          minWidth: 160.0,
+          minHeight: 40,
+          cornerRadius: 40.0,
+          activeBgColors: [
+            [UI.white],
+            [UI.white],
           ],
+          activeFgColor: Colors.white,
+          inactiveBgColor: Colors.transparent,
+          inactiveFgColor: Colors.white,
+          initialLabelIndex: ctrl.switchIndex.value,
+          totalSwitches: 2,
+          labels: const ['Cards', 'Accounts'],
+          customTextStyles: [UI.textStyle(14, UI.secondary, FontWeight.w600)],
+          radiusStyle: true,
+          onToggle: (index) {
+            ctrl.switchIndex.value = index!;
+            print('switched to: $index');
+          },
         ),
       );
     }
@@ -234,39 +266,7 @@ class ConnectWallet extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Column(
             children: [
-              Container(
-                width: 334,
-                height: 48,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(40),
-                  color: UI.whiteGrey,
-                ),
-                margin: const EdgeInsets.symmetric(vertical: 12),
-                padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 4),
-                child: ToggleSwitch(
-                  minWidth: 160.0,
-                  minHeight: 40,
-                  cornerRadius: 40.0,
-                  activeBgColors: [
-                    [UI.white],
-                    [UI.white],
-                  ],
-                  activeFgColor: Colors.white,
-                  inactiveBgColor: Colors.transparent,
-                  inactiveFgColor: Colors.white,
-                  initialLabelIndex: ctrl.switchIndex.value,
-                  totalSwitches: 2,
-                  labels: const ['Cards', 'Accounts'],
-                  customTextStyles: [
-                    UI.textStyle(14, UI.secondary, FontWeight.w600)
-                  ],
-                  radiusStyle: true,
-                  onToggle: (index) {
-                    ctrl.switchIndex.value = index!;
-                    print('switched to: $index');
-                  },
-                ),
-              ),
+              toggleSwitch(),
               Obx(() => ctrl.switchIndex.value == 0 ? cards() : accounts())
             ],
           ),

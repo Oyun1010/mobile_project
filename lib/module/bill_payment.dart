@@ -12,7 +12,6 @@ class BillPayment extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           UI.text(name, 16, fontWeight, UI.secondary),
-
           //TODO:
           UI.text(price, 16, fontWeight, UI.dark),
         ],
@@ -66,23 +65,19 @@ class BillPayment extends StatelessWidget {
                   borderRadius: BorderRadius.circular(50),
                   color: UI.bWhite,
                 ),
-                child: Image.asset(
-                  "assets/logo/image1.png",
-                  width: 40,
-                  height: 40,
-                ),
+                child: Image.asset("assets/logo/image1.png",
+                    width: 40, height: 40),
               ),
               SizedBox(
                 width: 250,
-                child:
-                    //TODO: upwork dynamic bna and color change
-                    UI.text(
-                        "You will pay Youtube Premium for one month with BCA OneKlik",
-                        16,
-                        FontWeight.w600,
-                        UI.black,
-                        alignment: Alignment.center,
-                        textAlign: TextAlign.center),
+                //TODO: upwork dynamic bna and color change
+                child: UI.text(
+                    "You will pay Youtube Premium for one month with BCA OneKlik",
+                    16,
+                    FontWeight.w600,
+                    UI.black,
+                    alignment: Alignment.center,
+                    textAlign: TextAlign.center),
               ),
               amountItem(),
               const SizedBox(height: 150),
@@ -91,7 +86,7 @@ class BillPayment extends StatelessWidget {
                   //TODO:
                   Navigator.pushNamed(context, '/successfully');
                 }),
-              )
+              ),
             ],
           ),
         ),

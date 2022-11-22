@@ -57,7 +57,7 @@ class UI {
       colors: <Color>[
         Color.fromRGBO(99, 181, 175, 1),
         Color.fromRGBO(67, 136, 131, 1),
-      ], // Gradient from https://learnui.design/tools/gradient-generator.html
+      ],
       tileMode: TileMode.mirror,
     );
   }
@@ -65,7 +65,7 @@ class UI {
   static topBackground() {
     return Container(
       width: double.infinity,
-      height: 280,
+      height: 240,
       decoration: BoxDecoration(
         color: UI.jungleGreen,
         borderRadius: const BorderRadius.only(
@@ -94,10 +94,8 @@ class UI {
         },
         child: Align(
           alignment: Alignment.center,
-          child: Text(
-            text,
-            style: UI.textStyle(18, color, FontWeight.w600),
-          ),
+          child: UI.text(text, 18, FontWeight.w600, color,
+              alignment: Alignment.center),
         ),
       ),
     );
@@ -113,14 +111,11 @@ class UI {
       elevation: MaterialStateProperty.all(0),
       padding: MaterialStateProperty.all(EdgeInsets.zero),
       backgroundColor: MaterialStateProperty.all(color),
-      foregroundColor: MaterialStateProperty.all(UI.white),
       overlayColor: MaterialStateProperty.all(UI.white.withOpacity(0.2)),
-      shadowColor: MaterialStateProperty.all(color),
       shape: MaterialStateProperty.all(
         RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(borderRadius), side: side),
       ),
-      // fixedSize: MaterialStateProperty.all(const Size(358, 60)),
     );
   }
 
@@ -129,13 +124,12 @@ class UI {
       {Function? func}) {
     return Container(
       padding: const EdgeInsets.fromLTRB(20, 30, 20, 8),
-      height: 80,
+      height: 150,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          //TODO: onPress function
-          Container(
+          SizedBox(
             width: 40,
             height: 40,
             child: ElevatedButton(
@@ -143,11 +137,7 @@ class UI {
                 func!();
               },
               style: UI.buttonStyle(Colors.transparent),
-              child: Icon(
-                Icons.arrow_back_ios,
-                size: 18,
-                color: UI.white,
-              ),
+              child: Icon(Icons.arrow_back_ios, size: 18, color: UI.white),
             ),
           ),
           SizedBox(
@@ -156,20 +146,15 @@ class UI {
             child: UI.text(text, 18, FontWeight.w600, UI.white,
                 alignment: Alignment.center),
           ),
-          //TODO;
           SizedBox(
             width: 40,
             height: 40,
             child: ElevatedButton(
               onPressed: () {
-                // func();
+                //TODO; notifcation button or ... button
               },
               style: UI.buttonStyle(Colors.transparent),
-              child: Icon(
-                iconData,
-                size: 24,
-                color: UI.white,
-              ),
+              child: Icon(iconData, size: 24, color: UI.white),
             ),
           ),
         ],
