@@ -124,7 +124,9 @@ class UI {
     );
   }
 
-  static Widget headerWidget(String text) {
+  static Widget headerWidget(
+      BuildContext context, String text, IconData iconData,
+      {Function? func}) {
     return Container(
       padding: const EdgeInsets.fromLTRB(20, 30, 20, 8),
       height: 80,
@@ -137,7 +139,9 @@ class UI {
             width: 40,
             height: 40,
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                func!();
+              },
               style: UI.buttonStyle(Colors.transparent),
               child: Icon(
                 Icons.arrow_back_ios,
@@ -162,7 +166,7 @@ class UI {
               },
               style: UI.buttonStyle(Colors.transparent),
               child: Icon(
-                Icons.notifications_outlined,
+                iconData,
                 size: 24,
                 color: UI.white,
               ),

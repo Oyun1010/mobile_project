@@ -2,13 +2,13 @@ import 'package:app/module/bill_details.dart';
 import 'package:app/module/bill_payment.dart';
 import 'package:app/module/connect_wallet.dart';
 import 'package:app/module/payment_successfully.dart';
+import 'package:app/page/add_expense.dart';
 import 'package:app/page/home_page.dart';
 import 'package:app/page/wallet.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
-import 'package:get/get.dart';
+import 'package:ionicons/ionicons.dart';
 import '../theme.dart';
 
 class BasicPage extends StatefulWidget {
@@ -17,12 +17,8 @@ class BasicPage extends StatefulWidget {
 }
 
 class BasicPageState extends State<BasicPage> {
-  int bottomNavIndex = 0;
-  List<Widget> widgetOptions = <Widget>[
-    HomePage(),
-    HomePage(),
-    Wallet(),
-  ];
+  int currentIndex = 0;
+
   PersistentTabController persistentTabController =
       PersistentTabController(initialIndex: 0);
 
@@ -31,7 +27,7 @@ class BasicPageState extends State<BasicPage> {
     List<Widget> _buildScreens() {
       return [
         HomePage(),
-        HomePage(),
+        AddExpense(),
         Wallet(),
         Wallet(),
       ];
@@ -40,8 +36,8 @@ class BasicPageState extends State<BasicPage> {
     PersistentBottomNavBarItem persistentBottomNavBarItem(IconData iconData) {
       return PersistentBottomNavBarItem(
         icon: Icon(iconData),
-        // title: ("Settings"),
-        activeColorPrimary: CupertinoColors.activeBlue,
+        activeColorPrimary: UI.jungleGreen,
+        iconSize: 30,
         inactiveColorPrimary: CupertinoColors.systemGrey,
         routeAndNavigatorSettings: RouteAndNavigatorSettings(
           initialRoute: "/",
@@ -58,16 +54,15 @@ class BasicPageState extends State<BasicPage> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: UI.white,
-        // body: widgetOptions[bottomNavIndex],
         body: PersistentTabView(
           context,
           controller: persistentTabController,
           screens: _buildScreens(),
           items: [
-            persistentBottomNavBarItem(Icons.home_outlined),
-            persistentBottomNavBarItem(Icons.chat_rounded),
-            persistentBottomNavBarItem(Icons.wallet),
-            persistentBottomNavBarItem(Icons.usb_rounded),
+            persistentBottomNavBarItem(Ionicons.home_outline),
+            persistentBottomNavBarItem(Ionicons.add_outline),
+            persistentBottomNavBarItem(Ionicons.wallet_outline),
+            persistentBottomNavBarItem(Ionicons.person_outline),
           ],
           resizeToAvoidBottomInset: true,
           navBarHeight: MediaQuery.of(context).viewInsets.bottom > 0
@@ -75,7 +70,7 @@ class BasicPageState extends State<BasicPage> {
               : kBottomNavigationBarHeight,
           bottomScreenMargin: 0,
           backgroundColor: UI.white,
-          decoration: const NavBarDecoration(colorBehindNavBar: Colors.indigo),
+          decoration: NavBarDecoration(colorBehindNavBar: UI.jungleGreen),
           itemAnimationProperties: const ItemAnimationProperties(
             duration: Duration(milliseconds: 400),
             curve: Curves.ease,
@@ -86,35 +81,6 @@ class BasicPageState extends State<BasicPage> {
           popAllScreensOnTapOfSelectedTab: true,
           navBarStyle: NavBarStyle.style6,
         ),
-        floatingActionButton: bottomNavIndex == 0
-            ? FloatingActionButton(
-                backgroundColor: UI.jungleGreen,
-                onPressed: () {},
-                child: Icon(
-                  Icons.add,
-                  color: UI.white,
-                  size: 24,
-                ),
-                //params
-              )
-            : null,
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        // bottomNavigationBar: AnimatedBottomNavigationBar(
-        //   icons: const [
-        //     Icons.home,
-        //     Icons.table_chart,
-        //     Icons.wallet,
-        //     Icons.portable_wifi_off_outlined
-        //   ],
-        //   inactiveColor: UI.ligthgrey,
-        //   iconSize: 30,
-        //   activeColor: UI.jungleGreen,
-        //   activeIndex: bottomNavIndex,
-        //   gapLocation: GapLocation.center,
-        //   notchSmoothness: NotchSmoothness.softEdge,
-        //   onTap: (index) => setState(() => bottomNavIndex = index),
-        //   //other params
-        // ),
       ),
     );
   }

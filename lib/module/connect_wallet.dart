@@ -1,5 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ionicons/ionicons.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 import '../theme.dart';
 
@@ -187,10 +189,10 @@ class ConnectWallet extends StatelessWidget {
           children: [
             accountItem(Icons.comment_bank, "Bank Link",
                 "Connect your bank account to deposit & fund", 0, ctrl.bank),
-            accountItem(Icons.comment_bank, "Microdeposits",
+            accountItem(CupertinoIcons.bitcoin_circle_fill, "Microdeposits",
                 "Connect bank in 5-7 days", 1, ctrl.micro),
-            accountItem(Icons.comment_bank, "Paypal",
-                "Connect you paypal account", 2, ctrl.payPal),
+            accountItem(Icons.paypal, "Paypal", "Connect you paypal account", 2,
+                ctrl.payPal),
             const SizedBox(height: 24),
             Align(
               alignment: Alignment.bottomCenter,
@@ -277,7 +279,14 @@ class ConnectWallet extends StatelessWidget {
       body: Stack(
         children: [
           UI.topBackground(),
-          UI.headerWidget("Connect Wallet"),
+          UI.headerWidget(
+            context,
+            "Connect Wallet",
+            Ionicons.notifications_outline,
+            func: () {
+              Navigator.pop(context);
+            },
+          ),
           body(),
         ],
       ),

@@ -1,5 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ionicons/ionicons.dart';
 import '../theme.dart';
 
 class BillDetailsController extends GetxController {
@@ -29,13 +31,16 @@ class BillDetails extends StatelessWidget {
       return Obx(
         () => Container(
           width: 344,
-          height: 90,
+          height: 80,
           margin: const EdgeInsets.symmetric(vertical: 4),
           child: ElevatedButton(
             onPressed: () {
-              print("jjjjjjjjjjjjjjjjjjjjjjj");
               checked.value = !checked.value;
-              index == 0 ? ctrl.debit.value = false : ctrl.paypal.value = false;
+              if (index == 0) {
+                ctrl.paypal.value = false;
+              } else {
+                ctrl.debit.value = false;
+              }
             },
             style: UI.buttonStyle(
               checked.value ? UI.greyGreen : UI.lilia,
@@ -169,7 +174,8 @@ class BillDetails extends StatelessWidget {
                 child: UI.text(
                     "Select payment method", 18, FontWeight.w500, UI.dark),
               ),
-              selectedItem(Icons.wallet, "Debit Card", ctrl.debit, 0),
+              selectedItem(
+                  CupertinoIcons.creditcard_fill, "Debit Card", ctrl.debit, 0),
               selectedItem(Icons.paypal, "Paypal", ctrl.paypal, 1),
               const SizedBox(height: 6),
               UI.button("Pay now", UI.white, () {
@@ -187,7 +193,14 @@ class BillDetails extends StatelessWidget {
       child: Stack(
         children: [
           UI.topBackground(),
-          UI.headerWidget("Bill Details"),
+          UI.headerWidget(
+            context,
+            "Bill Details",
+            Ionicons.ellipsis_horizontal,
+            func: () {
+              Navigator.pop(context);
+            },
+          ),
           body(),
         ],
       ),

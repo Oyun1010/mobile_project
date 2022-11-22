@@ -1,6 +1,7 @@
 import 'package:app/module/pay_item.dart';
 import 'package:app/module/transactions_item.dart';
 import 'package:flutter/material.dart';
+import 'package:ionicons/ionicons.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 import 'package:get/get.dart';
 import '../theme.dart';
@@ -65,7 +66,7 @@ class Wallet extends StatelessWidget {
       return Align(
         alignment: Alignment.bottomCenter,
         child: Container(
-          height: UI.H(context) - 180,
+          height: UI.H(context) - 120,
           width: UI.W(context),
           decoration: BoxDecoration(
             borderRadius: const BorderRadius.only(
@@ -166,7 +167,7 @@ class Wallet extends StatelessWidget {
       child: Stack(
         children: [
           UI.topBackground(),
-          UI.headerWidget("Wallet"),
+          UI.headerWidget(context, "Wallet", Ionicons.notifications_outline),
           body(),
         ],
       ),

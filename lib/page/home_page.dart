@@ -1,7 +1,9 @@
 import 'package:app/module/transactions_item.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:get/get.dart';
+import 'package:ionicons/ionicons.dart';
 import '../theme.dart';
 
 class HomePageController extends GetxController {}
@@ -50,7 +52,7 @@ class HomePage extends StatelessWidget {
                           width: 12,
                           height: 12,
                           child: Icon(
-                            Icons.arrow_upward,
+                            Ionicons.chevron_up,
                             size: 10,
                             color: UI.white,
                           ),
@@ -64,27 +66,28 @@ class HomePage extends StatelessWidget {
                   height: 21,
                   width: 21,
                   child: Icon(
-                    Icons.corporate_fare,
+                    Ionicons.ellipsis_horizontal,
                     size: 20,
                     color: UI.white,
                   ),
                 )
               ],
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 48),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 cardItem(
                     Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Container(
                           width: 24,
                           height: 24,
                           margin: const EdgeInsets.only(right: 6),
                           child: Icon(
-                            Icons.arrow_upward,
+                            Ionicons.arrow_down_outline,
                             size: 20,
                             color: UI.white,
                           ),
@@ -95,23 +98,25 @@ class HomePage extends StatelessWidget {
                     "18840",
                     20),
                 cardItem(
-                    Row(
-                      children: [
-                        Container(
-                          width: 24,
-                          height: 24,
-                          margin: const EdgeInsets.only(right: 6),
-                          child: Icon(
-                            Icons.arrow_upward,
-                            size: 20,
-                            color: UI.white,
-                          ),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Container(
+                        width: 24,
+                        height: 24,
+                        margin: const EdgeInsets.only(right: 6),
+                        child: Icon(
+                          Ionicons.arrow_up_outline,
+                          size: 20,
+                          color: UI.white,
                         ),
-                        UI.text("Expenses", 16, FontWeight.w600, UI.white)
-                      ],
-                    ),
-                    "284",
-                    20)
+                      ),
+                      UI.text("Expenses", 16, FontWeight.w600, UI.white)
+                    ],
+                  ),
+                  "284",
+                  20,
+                ),
               ],
             ),
           ],
@@ -185,7 +190,7 @@ class HomePage extends StatelessWidget {
                     onPressed: () {},
                     style: UI.buttonStyle(Colors.transparent),
                     child: Icon(
-                      Icons.notifications_outlined,
+                      Ionicons.notifications_outline,
                       size: 24,
                       color: UI.white,
                     ),
@@ -199,29 +204,28 @@ class HomePage extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24),
               child: Container(
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      card(),
-                      title("Transactions History"),
-                      //TODO : firebase list orj irne
+                height: UI.H(context) - 120,
+                child: Column(
+                  children: [
+                    card(),
+                    title("Transactions History"),
+                    //TODO : firebase list orj irne
 
-                      TransactionsItem(),
-                      TransactionsItem(),
-                      TransactionsItem(),
-                      title("Send Again"),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          avatar(""),
-                          avatar(""),
-                          avatar(""),
-                          avatar(""),
-                          avatar(""),
-                        ],
-                      )
-                    ],
-                  ),
+                    TransactionsItem(),
+                    TransactionsItem(),
+                    TransactionsItem(),
+                    title("Send Again"),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        avatar(""),
+                        avatar(""),
+                        avatar(""),
+                        avatar(""),
+                        avatar(""),
+                      ],
+                    )
+                  ],
                 ),
               ),
             ),

@@ -19,21 +19,12 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      debugShowMaterialGrid: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      getPages: [
-        GetPage(name: '/', page: () => MyHomePage()),
-        GetPage(name: '/basic', page: () => BasicPage()),
-        GetPage(name: '/home', page: () => HomePage()),
-        GetPage(name: '/wallet', page: () => Wallet()),
-        // GetPage(name: '/connectWallet', page: () => ConnectWallet()),
-        // GetPage(name: '/billDetails', page: () => BillDetails()),
-        // GetPage(name: '/billPayment', page: () => BillPayment()),
-        // GetPage(name: '/wallet', page: () => Waller)
-      ],
-      initialRoute: '/',
       home: MyHomePage(),
     );
   }
@@ -94,7 +85,8 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ),
           UI.button("Get Started", UI.white, () {
-            Get.toNamed('/basic');
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => BasicPage()));
           }),
           Container(
             padding: const EdgeInsets.only(top: 20),
