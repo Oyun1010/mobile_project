@@ -28,9 +28,9 @@ class MyApp extends StatelessWidget {
         GetPage(name: '/basic', page: () => BasicPage()),
         GetPage(name: '/home', page: () => HomePage()),
         GetPage(name: '/wallet', page: () => Wallet()),
-        GetPage(name: '/connectWallet', page: () => ConnectWallet()),
-        GetPage(name: '/billDetails', page: () => BillDetails()),
-        GetPage(name: '/billPayment', page: () => BillPayment()),
+        // GetPage(name: '/connectWallet', page: () => ConnectWallet()),
+        // GetPage(name: '/billDetails', page: () => BillDetails()),
+        // GetPage(name: '/billPayment', page: () => BillPayment()),
         // GetPage(name: '/wallet', page: () => Waller)
       ],
       initialRoute: '/',

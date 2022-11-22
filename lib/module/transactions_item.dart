@@ -3,11 +3,11 @@ import 'dart:math';
 import 'package:app/theme.dart';
 import 'package:flutter/material.dart';
 
-class TransactionsHistoryItem extends StatelessWidget {
+class TransactionsItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+      padding: const EdgeInsets.symmetric(vertical: 6),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -22,17 +22,22 @@ class TransactionsHistoryItem extends StatelessWidget {
                   "assets/logo/image1.png",
                   width: 30,
                   height: 30,
-                  fit: BoxFit.contain,
                 ),
               ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  //TODO: upwork dynamic bna and color change
-                  UI.text("Upwork", 16, FontWeight.w500, UI.black),
-                  UI.text("Today", 13, FontWeight.w400, UI.secondary),
-                ],
+              SizedBox(
+                width: 120,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    //TODO: upwork dynamic bna and color change
+                    UI.text("Upwork", 16, FontWeight.w500, UI.black,
+                        alignment: Alignment.centerLeft),
+                    const SizedBox(height: 8),
+                    UI.text("Today", 13, FontWeight.w400, UI.secondary,
+                        alignment: Alignment.centerLeft),
+                  ],
+                ),
               )
             ],
           ),

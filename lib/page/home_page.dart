@@ -1,4 +1,4 @@
-import 'package:app/module/transactions_histroty_item.dart';
+import 'package:app/module/transactions_item.dart';
 import 'package:flutter/material.dart';
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:get/get.dart';
@@ -25,7 +25,7 @@ class HomePage extends StatelessWidget {
     Widget card() {
       return Container(
         width: 374,
-        height: 201,
+        height: 200,
         padding: const EdgeInsets.all(24),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
@@ -119,31 +119,68 @@ class HomePage extends StatelessWidget {
       );
     }
 
+    Widget title(String text) {
+      return Container(
+        height: 35,
+        padding: const EdgeInsets.symmetric(vertical: 8),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            UI.text(text, 16, FontWeight.w600, UI.black),
+            UI.text("See all", 14, FontWeight.w400, UI.secondary),
+          ],
+        ),
+      );
+    }
+
+    Widget avatar(String img) {
+      return SizedBox(
+        width: 62,
+        height: 62,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(50),
+          child: Image.asset(
+            img,
+            width: 62,
+            height: 62,
+            fit: BoxFit.cover,
+          ),
+        ),
+      );
+    }
+
     return Container(
       color: UI.white,
       child: Stack(
         children: [
           UI.topBackground(),
           Container(
-            padding: const EdgeInsets.fromLTRB(24, 30, 24, 8),
-            height: 40,
-            width: UI.W(context) - 50,
+            padding: const EdgeInsets.fromLTRB(20, 30, 20, 8),
+            height: 80,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    UI.text("Good afternoon,", 14, FontWeight.w500, UI.white),
-                    UI.text("Enjelin Morgeana", 20, FontWeight.w600, UI.white),
-                    //TODO: firebase get username
-                  ],
+                Expanded(
+                  child: Container(
+                    width: 250,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        UI.text(
+                            "Good afternoon,", 14, FontWeight.w500, UI.white),
+                        UI.text(
+                            "Enjelin Morgeana", 20, FontWeight.w600, UI.white),
+                        //TODO: firebase get username
+                      ],
+                    ),
+                  ),
                 ),
                 //TODO: notifcation button
                 SizedBox(
-                  width: 24,
-                  height: 24,
+                  width: 40,
+                  height: 40,
                   child: ElevatedButton(
                     onPressed: () {},
                     style: UI.buttonStyle(Colors.transparent),
@@ -158,28 +195,33 @@ class HomePage extends StatelessWidget {
             ),
           ),
           Align(
-            alignment: const Alignment(0, -0.4),
+            alignment: Alignment.bottomCenter,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24),
               child: Container(
-                height: UI.W(context) - 150,
-                child: Column(
-                  children: [
-                    card(),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8),
-                      child: Row(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      card(),
+                      title("Transactions History"),
+                      //TODO : firebase list orj irne
+
+                      TransactionsItem(),
+                      TransactionsItem(),
+                      TransactionsItem(),
+                      title("Send Again"),
+                      Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          UI.text("Transactions History", 16, FontWeight.w600,
-                              UI.black),
-                          UI.text("See all", 14, FontWeight.w400, UI.secondary),
+                          avatar(""),
+                          avatar(""),
+                          avatar(""),
+                          avatar(""),
+                          avatar(""),
                         ],
-                      ),
-                    ), //TODO : firebase lite orj irne
-                    TransactionsHistoryItem(),
-                  ],
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),

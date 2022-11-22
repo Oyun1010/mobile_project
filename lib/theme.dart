@@ -12,6 +12,12 @@ class UI {
   static Color green = const Color.fromRGBO(37, 169, 105, 1);
   static Color red = const Color.fromRGBO(249, 91, 81, 1);
   static Color greenWhite = const Color.fromRGBO(236, 249, 248, 1);
+  static Color whiteGrey = const Color.fromRGBO(244, 246, 246, 1);
+  static Color borderColor = const Color.fromRGBO(221, 221, 221, 1);
+  static Color greyGreen = const Color.fromRGBO(67, 136, 131, 0.1);
+  static Color darkGrey = const Color.fromRGBO(136, 136, 136, 1);
+  static Color lilia = const Color.fromRGBO(250, 250, 250, 1);
+  static Color dark = const Color.fromRGBO(0, 0, 0, 1);
 
   static W(BuildContext context) {
     return MediaQuery.of(context).size.width;
@@ -31,16 +37,15 @@ class UI {
   }
 
   static Widget text(
-      String text, double fontSize, FontWeight fontWeight, Color color) {
+      String text, double fontSize, FontWeight fontWeight, Color color,
+      {TextAlign textAlign = TextAlign.left,
+      Alignment alignment = Alignment.centerLeft}) {
     return Align(
-      alignment: Alignment.centerLeft,
-      child: Container(
-        padding: const EdgeInsets.only(bottom: 4),
-        child: Text(
-          text,
-          style: UI.textStyle(fontSize, color, fontWeight),
-          textAlign: TextAlign.left,
-        ),
+      alignment: alignment,
+      child: Text(
+        text,
+        style: UI.textStyle(fontSize, color, fontWeight),
+        textAlign: textAlign,
       ),
     );
   }
@@ -98,18 +103,73 @@ class UI {
     );
   }
 
-  static buttonStyle(Color color) {
+  static buttonStyle(
+    Color color, {
+    BorderSide side = BorderSide.none,
+    double borderRadius = 40,
+  }) {
     return ButtonStyle(
+      alignment: Alignment.center,
+      elevation: MaterialStateProperty.all(0),
+      padding: MaterialStateProperty.all(EdgeInsets.zero),
       backgroundColor: MaterialStateProperty.all(color),
-      shadowColor: MaterialStateProperty.all(color),
       foregroundColor: MaterialStateProperty.all(UI.white),
       overlayColor: MaterialStateProperty.all(UI.white.withOpacity(0.2)),
+      shadowColor: MaterialStateProperty.all(color),
       shape: MaterialStateProperty.all(
         RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(40),
-        ),
+            borderRadius: BorderRadius.circular(borderRadius), side: side),
       ),
-      fixedSize: MaterialStateProperty.all(const Size(358, 60)),
+      // fixedSize: MaterialStateProperty.all(const Size(358, 60)),
+    );
+  }
+
+  static Widget headerWidget(String text) {
+    return Container(
+      padding: const EdgeInsets.fromLTRB(20, 30, 20, 8),
+      height: 80,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          //TODO: onPress function
+          Container(
+            width: 40,
+            height: 40,
+            child: ElevatedButton(
+              onPressed: () {},
+              style: UI.buttonStyle(Colors.transparent),
+              child: Icon(
+                Icons.arrow_back_ios,
+                size: 18,
+                color: UI.white,
+              ),
+            ),
+          ),
+          SizedBox(
+            width: 180,
+            height: 25,
+            child: UI.text(text, 18, FontWeight.w600, UI.white,
+                alignment: Alignment.center),
+          ),
+          //TODO;
+          SizedBox(
+            width: 40,
+            height: 40,
+            child: ElevatedButton(
+              onPressed: () {
+                // func();
+              },
+              style: UI.buttonStyle(Colors.transparent),
+              child: Icon(
+                Icons.notifications_outlined,
+                size: 24,
+                color: UI.white,
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
