@@ -1,12 +1,5 @@
-import 'package:app/module/bill_details.dart';
-import 'package:app/module/bill_payment.dart';
-import 'package:app/module/connect_wallet.dart';
-import 'package:app/page/basic_page.dart';
-import 'package:app/page/home_page.dart';
-import 'package:app/page/wallet.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:get/get_navigation/src/root/get_material_app.dart';
+import '../page/basic_page.dart';
 import 'theme.dart';
 
 void main() {
@@ -15,8 +8,6 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -37,14 +28,30 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   bool splash = true;
-  Widget Splash() {
+  @override
+  void initState() {
+    if (splash) {
+      Future.delayed(const Duration(seconds: 5), () {
+        setState(() {
+          splash = false;
+        });
+      });
+    } else {
+      setState(() {
+        splash = true;
+      });
+    }
+  }
+
+  Widget splashScreen() {
     return Container(
       width: double.infinity,
       height: double.infinity,
       decoration: BoxDecoration(
         gradient: UI.linearGradient(),
       ),
-      child: UI.text("mono", 50, FontWeight.bold, UI.white),
+      child: UI.text("mono", 50, FontWeight.bold, UI.white,
+          alignment: Alignment.center),
     );
   }
 
@@ -63,11 +70,30 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   fit: BoxFit.cover),
             ),
-            child: Padding(
-              padding: const EdgeInsets.only(top: 120),
-              child: Image.asset(
-                "assets/Man.png",
-                height: UI.H(context) / 2 - 200,
+            child: Container(
+              width: 280,
+              margin: const EdgeInsets.only(top: 80),
+              child: Stack(
+                children: [
+                  Align(
+                    alignment: const Alignment(-0.4, -0.9),
+                    child:
+                        Image.asset("assets/Coint.png", width: 65, height: 65),
+                  ),
+                  Align(
+                    alignment: const Alignment(0.5, -0.7),
+                    child:
+                        Image.asset("assets/Donut.png", width: 65, height: 65),
+                  ),
+                  Align(
+                    alignment: Alignment.center,
+                    child: Image.asset(
+                      "assets/Man.png",
+                      height: 400,
+                      width: 300,
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
@@ -109,7 +135,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Container(
       color: UI.white,
-      child: body(),
+      child: splash ? splashScreen() : body(),
     );
   }
 }
