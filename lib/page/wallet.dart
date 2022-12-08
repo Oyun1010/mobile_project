@@ -1,3 +1,5 @@
+import 'package:app/data/GetData.dart';
+import 'package:app/data/model.dart';
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:toggle_switch/toggle_switch.dart';
@@ -8,6 +10,12 @@ import '../theme.dart';
 
 class WalletContoller extends GetxController {
   RxInt switchIndex = 0.obs;
+  RxList<T_ransactions> transactions = <T_ransactions>[].obs;
+  RxList<UpComingBill> upComingBills = <UpComingBill>[].obs;
+  WalletContoller() {
+    GetData.transactionsHistory().then((value) => transactions.value = value);
+    GetData.upComingBills().then((value) => upComingBills.value = value);
+  }
 }
 
 class Wallet extends StatelessWidget {
@@ -43,22 +51,24 @@ class Wallet extends StatelessWidget {
     }
 
     Widget transactionsItem() {
-      return Column(
-        children: [
-          TransactionsItem(),
-          TransactionsItem(),
-          TransactionsItem(),
-        ],
+      return Obx(
+        () => Column(
+          // children: [
+          //   TransactionsItem(),
+          //   TransactionsItem(),
+          //   TransactionsItem(),
+          // ],
+          children: ctrl.transactions
+              .map((element) => TransactionsItem(element))
+              .toList(),
+        ),
       );
     }
 
     Widget upcomingBillsItem() {
       return Column(
-        children: [
-          PayItem(),
-          PayItem(),
-          PayItem(),
-        ],
+        children:
+            ctrl.upComingBills.map((element) => PayItem(element)).toList(),
       );
     }
 

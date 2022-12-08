@@ -1,8 +1,11 @@
+import 'package:app/data/model.dart';
 import 'package:app/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class PayItem extends StatelessWidget {
+  UpComingBill upComingBill;
+  PayItem(this.upComingBill, {super.key});
   @override
   Widget build(BuildContext context) {
     return Container(

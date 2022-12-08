@@ -1,12 +1,20 @@
+import 'package:app/data/GetData.dart';
+import 'package:app/data/model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
 import '../module/transactions_item.dart';
 import '../theme.dart';
 
-class HomePageController extends GetxController {}
+class HomePageController extends GetxController {
+  RxList<T_ransactions> transactions = <T_ransactions>[].obs;
+  HomePageController() {
+    GetData.transactionsHistory().then((value) => transactions.value = value);
+  }
+}
 
 class HomePage extends StatelessWidget {
+  HomePageController ctrl = HomePageController();
   @override
   Widget build(BuildContext context) {
     Widget cardItem(Widget title, String amount, double fontSize) {
@@ -183,9 +191,13 @@ class HomePage extends StatelessWidget {
                     card(),
                     title("Transactions History"),
                     //TODO : firebase list eer guigene
-                    TransactionsItem(),
-                    TransactionsItem(),
-                    TransactionsItem(),
+                    Obx(() => ctrl.transactions.isNotEmpty
+                        ? Column(
+                            children: ctrl.transactions
+                                .map((element) => TransactionsItem(element))
+                                .toList(),
+                          )
+                        : Container()),
                     title("Send Again"),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,

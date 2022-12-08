@@ -1,7 +1,10 @@
+import 'package:app/data/model.dart';
 import 'package:app/theme.dart';
 import 'package:flutter/material.dart';
 
 class TransactionsItem extends StatelessWidget {
+  T_ransactions transactions;
+  TransactionsItem(this.transactions);
   @override
   Widget build(BuildContext context) {
     return Container(
