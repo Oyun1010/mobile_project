@@ -1,3 +1,4 @@
+import 'package:app/module/pay_item.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -50,6 +51,7 @@ class ConnectWallet extends StatelessWidget {
           Container(
             height: 200,
             width: 324,
+            margin: const EdgeInsets.symmetric(vertical: 8),
             child: Stack(
               children: [
                 Align(
@@ -67,7 +69,7 @@ class ConnectWallet extends StatelessWidget {
                   alignment: const Alignment(0, 0.1),
                   child: Image.asset(
                     "assets/Cards.png",
-                    width: 300,
+                    width: 320,
                     height: 180,
                   ),
                 ),
@@ -76,7 +78,7 @@ class ConnectWallet extends StatelessWidget {
           ),
           UI.text("Add your debit Cart", 16, FontWeight.w500, UI.black),
           Padding(
-            padding: const EdgeInsets.only(top: 4, bottom: 8),
+            padding: const EdgeInsets.only(top: 12, bottom: 8),
             child: UI.text(
               "This card must be connected to a bank account under your name",
               13,
@@ -89,14 +91,14 @@ class ConnectWallet extends StatelessWidget {
             children: [
               textField(name_cart, "DEBIT CARD NUMBER", 220),
               const SizedBox(width: 11),
-              textField(name_cart, "CVC", 133),
+              textField(name_cart, "CVC", 120),
             ],
           ),
           Row(
             children: [
               textField(name_cart, "EXPIRATION MM/YY", 220),
               const SizedBox(width: 11),
-              textField(name_cart, "ZIP", 133),
+              textField(name_cart, "ZIP", 120),
             ],
           ),
         ],
@@ -192,26 +194,23 @@ class ConnectWallet extends StatelessWidget {
               "Connect bank in 5-7 days", 1, ctrl.micro),
           accountItem(Icons.paypal, "Paypal", "Connect you paypal account", 2,
               ctrl.payPal),
-          const SizedBox(height: 24),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: SizedBox(
-              width: 358,
-              height: 64,
-              child: ElevatedButton(
-                onPressed: () {
-                  //TODO:
-                  Navigator.pushNamed(context, '/billDetails');
-                },
-                style: UI.buttonStyle(
-                  UI.white,
-                  side: BorderSide(color: UI.jungleGreen),
-                ),
-                child: UI.text("Next", 18, FontWeight.w600, UI.jungleGreen,
-                    alignment: Alignment.center),
+          const SizedBox(height: 70),
+          SizedBox(
+            width: 358,
+            height: 64,
+            child: ElevatedButton(
+              onPressed: () {
+                //TODO:
+                Navigator.pushNamed(context, '/billDetails');
+              },
+              style: UI.buttonStyle(
+                UI.white,
+                side: BorderSide(color: UI.jungleGreen),
               ),
+              child: UI.text("Next", 18, FontWeight.w600, UI.jungleGreen,
+                  alignment: Alignment.center),
             ),
-          )
+          ),
         ],
       );
     }
@@ -250,46 +249,26 @@ class ConnectWallet extends StatelessWidget {
       );
     }
 
-    Widget body() {
-      return Align(
-        alignment: Alignment.bottomCenter,
-        child: Container(
-          height: UI.H(context) - 120,
-          width: UI.W(context),
-          decoration: BoxDecoration(
-            borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(30),
-              topRight: Radius.circular(30),
-            ),
-            color: UI.white,
-          ),
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Column(
-            children: [
-              toggleSwitch(),
-              Obx(() => ctrl.switchIndex.value == 0 ? cards() : accounts())
-            ],
-          ),
-        ),
+    Widget child() {
+      return Column(
+        children: [
+          toggleSwitch(),
+          Obx(() => ctrl.switchIndex.value == 0 ? cards() : accounts())
+        ],
       );
     }
 
-    return Scaffold(
-      // color: UI.white,
-      body: Stack(
-        children: [
-          UI.topBackground(),
-          UI.headerWidget(
-            context,
-            "Connect Wallet",
-            Ionicons.notifications_outline,
-            func: () {
-              Navigator.pop(context);
-            },
-          ),
-          body(),
-        ],
+    return UI.screen(
+      context,
+      UI.headerWidget(
+        context,
+        "Connect Wallet",
+        Ionicons.notifications_outline,
+        func: () {
+          Navigator.pop(context);
+        },
       ),
+      child(),
     );
   }
 }

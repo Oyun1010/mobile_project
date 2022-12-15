@@ -27,6 +27,34 @@ class UI {
     return MediaQuery.of(context).size.height;
   }
 
+  static screen(BuildContext context, Widget header, Widget child) {
+    return Container(
+      color: UI.white,
+      child: Stack(
+        children: [
+          UI.topBackground(),
+          header,
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Container(
+              height: UI.H(context) - 190,
+              width: UI.W(context),
+              decoration: BoxDecoration(
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(30),
+                  topRight: Radius.circular(30),
+                ),
+                color: UI.white,
+              ),
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: child,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   static textStyle(double fontSize, Color color, FontWeight fontWeight) {
     return GoogleFonts.inter(
         textStyle: TextStyle(
@@ -122,42 +150,45 @@ class UI {
   static Widget headerWidget(
       BuildContext context, String text, IconData iconData,
       {Function? func}) {
-    return Container(
-      padding: const EdgeInsets.fromLTRB(20, 30, 20, 8),
-      height: 150,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          SizedBox(
-            width: 40,
-            height: 40,
-            child: ElevatedButton(
-              onPressed: () {
-                func!();
-              },
-              style: UI.buttonStyle(Colors.transparent),
-              child: Icon(Icons.arrow_back_ios, size: 18, color: UI.white),
+    return SizedBox(
+      height: 250,
+      child: Container(
+        padding: const EdgeInsets.fromLTRB(20, 30, 20, 8),
+        height: 150,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            SizedBox(
+              width: 40,
+              height: 40,
+              child: ElevatedButton(
+                onPressed: () {
+                  func!();
+                },
+                style: UI.buttonStyle(Colors.transparent),
+                child: Icon(Icons.arrow_back_ios, size: 18, color: UI.white),
+              ),
             ),
-          ),
-          SizedBox(
-            width: 180,
-            height: 25,
-            child: UI.text(text, 18, FontWeight.w600, UI.white,
-                alignment: Alignment.center),
-          ),
-          SizedBox(
-            width: 40,
-            height: 40,
-            child: ElevatedButton(
-              onPressed: () {
-                //TODO; notifcation button or ... button
-              },
-              style: UI.buttonStyle(Colors.transparent),
-              child: Icon(iconData, size: 24, color: UI.white),
+            SizedBox(
+              width: 180,
+              height: 25,
+              child: UI.text(text, 18, FontWeight.w600, UI.white,
+                  alignment: Alignment.center),
             ),
-          ),
-        ],
+            SizedBox(
+              width: 40,
+              height: 40,
+              child: ElevatedButton(
+                onPressed: () {
+                  //TODO; notifcation button or ... button
+                },
+                style: UI.buttonStyle(Colors.transparent),
+                child: Icon(iconData, size: 24, color: UI.white),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

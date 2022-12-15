@@ -1,3 +1,4 @@
+import 'package:app/module/pay_item.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -11,6 +12,7 @@ class BillDetailsController extends GetxController {
 
 class BillDetails extends StatelessWidget {
   BillDetailsController ctrl = Get.put(BillDetailsController());
+  PayController payController = Get.put(PayController());
   @override
   Widget build(BuildContext context) {
     Widget amountRow(String name, String price,
@@ -21,7 +23,7 @@ class BillDetails extends StatelessWidget {
         children: [
           UI.text(name, 16, fontWeight, UI.secondary),
           //TODO:
-          UI.text(price, 16, fontWeight, UI.dark),
+          UI.text("\$${price}", 16, fontWeight, UI.dark),
         ],
       );
     }
@@ -32,7 +34,7 @@ class BillDetails extends StatelessWidget {
         () => Container(
           width: 344,
           height: 80,
-          margin: const EdgeInsets.symmetric(vertical: 4),
+          margin: const EdgeInsets.symmetric(vertical: 8),
           child: ElevatedButton(
             onPressed: () {
               checked.value = !checked.value;
@@ -95,115 +97,109 @@ class BillDetails extends StatelessWidget {
 
     Widget amountItem() {
       return Container(
-        child: Column(
-          children: [
-            //TODO: amount dyn
-            amountRow("Price", "11.99"),
-            const SizedBox(height: 6),
-            amountRow("Fee", "1.99"),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 12),
-              child: Divider(
-                height: 2,
-                color: UI.greyGreen,
-              ),
-            ),
-            //TODO: tootsoj gargah
-            amountRow("Total", "13.98", fontWeight: FontWeight.w700),
-          ],
-        ),
-      );
-    }
-
-    Widget body() {
-      return Align(
-        alignment: Alignment.bottomCenter,
-        child: Container(
-          height: UI.H(context) - 120,
-          width: UI.W(context),
-          decoration: BoxDecoration(
-            borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(30),
-              topRight: Radius.circular(30),
-            ),
-            color: UI.white,
-          ),
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Column(
+        margin: const EdgeInsets.only(top: 15, bottom: 20),
+        child: Obx(
+          () => Column(
             children: [
+              amountRow(
+                "Price",
+                payController.selected.value.amount
+                    .substring(1, payController.selected.value.amount.length),
+              ),
+              const SizedBox(height: 6),
+              amountRow("Fee", "1.99"),
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
-                child: Row(
-                  children: [
-                    Container(
-                      width: 80,
-                      height: 80,
-                      margin: const EdgeInsets.only(right: 12),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(50),
-                        color: UI.bWhite,
-                      ),
-                      child: Image.asset(
-                        "assets/logo/image1.png",
-                        width: 35,
-                        height: 35,
-                      ),
-                    ),
-                    SizedBox(
-                      width: 150,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          //TODO: upwork dynamic bna and color change
-                          UI.text("Upwork", 18, FontWeight.w500, UI.dark,
-                              alignment: Alignment.centerLeft),
-                          const SizedBox(height: 8),
-                          UI.text("Today", 14, FontWeight.w400, UI.secondary,
-                              alignment: Alignment.centerLeft),
-                        ],
-                      ),
-                    )
-                  ],
+                padding: const EdgeInsets.symmetric(vertical: 12),
+                child: Divider(
+                  height: 2,
+                  color: UI.darkGrey,
                 ),
               ),
-              amountItem(),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 8, top: 16),
-                child: UI.text(
-                    "Select payment method", 18, FontWeight.w500, UI.dark),
+              amountRow(
+                "Total",
+                "${double.parse(payController.selected.value.amount.substring(1, payController.selected.value.amount.length)) + 1.99}",
+                fontWeight: FontWeight.w700,
               ),
-              selectedItem(
-                  CupertinoIcons.creditcard_fill, "Debit Card", ctrl.debit, 0),
-              selectedItem(Icons.paypal, "Paypal", ctrl.paypal, 1),
-              const SizedBox(height: 6),
-              UI.button("Pay now", UI.white, () {
-                //TODO:
-                Navigator.pushNamed(context, '/billPayment');
-              })
             ],
           ),
         ),
       );
     }
 
-    return Container(
-      color: UI.white,
-      child: Stack(
+    Widget child() {
+      return Column(
         children: [
-          UI.topBackground(),
-          UI.headerWidget(
-            context,
-            "Bill Details",
-            Ionicons.ellipsis_horizontal,
-            func: () {
-              Navigator.pop(context);
-            },
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+            child: Row(
+              children: [
+                Container(
+                  width: 70,
+                  height: 70,
+                  margin: const EdgeInsets.only(right: 12),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(50),
+                    color: UI.bWhite,
+                  ),
+                  child: Image.network(
+                    payController.selected.value.image,
+                  ),
+                ),
+                SizedBox(
+                  width: 150,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      //TODO: upwork dynamic bna and color change
+                      UI.text(
+                        payController.selected.value.name,
+                        18,
+                        FontWeight.w500,
+                        UI.dark,
+                        alignment: Alignment.centerLeft,
+                      ),
+                      const SizedBox(height: 8),
+                      UI.text(
+                        payController.selected.value.dateTime,
+                        14,
+                        FontWeight.w400,
+                        UI.secondary,
+                        alignment: Alignment.centerLeft,
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            ),
           ),
-          body(),
+          amountItem(),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 12),
+            child:
+                UI.text("Select payment method", 18, FontWeight.w500, UI.dark),
+          ),
+          selectedItem(
+              CupertinoIcons.creditcard_fill, "Debit Card", ctrl.debit, 0),
+          selectedItem(Icons.paypal, "Paypal", ctrl.paypal, 1),
+          const SizedBox(height: 6),
+          UI.button("Pay now", UI.white, () {
+            Navigator.pushNamed(context, '/billPayment');
+          })
         ],
-      ),
-    );
+      );
+    }
+
+    return UI.screen(
+        context,
+        UI.headerWidget(
+          context,
+          "Bill Details",
+          Ionicons.ellipsis_horizontal,
+          func: () {
+            Navigator.pop(context);
+          },
+        ),
+        child());
   }
 }

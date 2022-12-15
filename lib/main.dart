@@ -6,22 +6,18 @@ import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      debugShowMaterialGrid: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
       home: MyHomePage(),
     );
   }
@@ -36,20 +32,15 @@ class _MyHomePageState extends State<MyHomePage> {
   bool splash = true;
   @override
   void initState() {
-    if (splash) {
-      Future.delayed(const Duration(seconds: 5), () {
-        setState(() {
-          splash = false;
-        });
-      });
-    } else {
+    Future.delayed(const Duration(seconds: 5), () {
       setState(() {
-        splash = true;
+        splash = false;
       });
-    }
+    });
   }
 
   Widget splashScreen() {
+    print("splash");
     return Container(
       width: double.infinity,
       height: double.infinity,
@@ -61,7 +52,8 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  Widget body() {
+  Widget mainScreen() {
+    print("body");
     return SizedBox(
       width: UI.W(context),
       child: Column(
@@ -141,7 +133,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Container(
       color: UI.white,
-      child: splash ? splashScreen() : body(),
+      child: splash ? splashScreen() : mainScreen(),
     );
   }
 }
