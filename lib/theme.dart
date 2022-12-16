@@ -92,14 +92,18 @@ class UI {
 
   static topBackground() {
     return Container(
-      width: double.infinity,
-      height: 240,
-      decoration: BoxDecoration(
-        color: UI.jungleGreen,
-        borderRadius: const BorderRadius.only(
-          bottomLeft: Radius.circular(35),
-          bottomRight: Radius.circular(35),
-        ),
+      height: 350,
+      child: Stack(
+        children: [
+          Image.asset(
+            "assets/bg.png",
+            fit: BoxFit.cover,
+          ),
+          Image.asset(
+            "assets/group.png",
+            fit: BoxFit.cover,
+          ),
+        ],
       ),
     );
   }

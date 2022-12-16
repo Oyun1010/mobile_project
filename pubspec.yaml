@@ -46,6 +46,7 @@ dependencies:
   ionicons: ^0.2.1
   firebase_core: ^2.4.0
   cloud_firestore: ^4.2.0
+  dropdown_button2: ^1.9.2
 
 dev_dependencies:
   flutter_test:
@@ -73,7 +74,6 @@ flutter:
   assets:
     - assets/bg1.png
     - assets/Man.png
-    - assets/logo/image1.png
     - assets/Cards.png
     - assets/Coint.png
     - assets/Donut.png
@@ -82,6 +82,8 @@ flutter:
     - assets/image3.png
     - assets/image4.png
     - assets/image5.png
+    - assets/bg.png
+    - assets/group.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

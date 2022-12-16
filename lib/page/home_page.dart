@@ -27,8 +27,6 @@ class HomePageController extends GetxController {
                 }
             }
         });
-    GetData.total.value = total.value;
-    print("total: ${total.value}");
   }
 }
 
@@ -36,14 +34,26 @@ class HomePage extends StatelessWidget {
   HomePageController ctrl = HomePageController();
   @override
   Widget build(BuildContext context) {
-    Widget cardItem(Widget title, String amount, double fontSize) {
+    Widget cardItem(Widget title, String amount, double fontSize,
+        {double padding = 0}) {
       return Column(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          title,
-          UI.text("\$${amount}.00", fontSize, FontWeight.w700, UI.white)
+          Align(
+            alignment: const Alignment(-0.5, 0),
+            child: Container(
+              width: 130,
+              height: 30,
+              child: title,
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: padding),
+            child:
+                UI.text("\$${amount}.00", fontSize, FontWeight.w700, UI.white),
+          )
         ],
       );
     }
@@ -94,45 +104,46 @@ class HomePage extends StatelessWidget {
                 )
               ],
             ),
-            const SizedBox(height: 48),
+            const Spacer(),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 cardItem(
                     Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisSize: MainAxisSize.max,
                       children: [
                         Container(
-                          width: 24,
-                          height: 24,
+                          width: 30,
+                          height: 30,
                           margin: const EdgeInsets.only(right: 6),
-                          child: Icon(Ionicons.arrow_down_outline,
-                              size: 20, color: UI.white),
+                          child: Icon(Ionicons.arrow_down_circle,
+                              size: 28, color: Colors.white.withOpacity(0.2)),
                         ),
-                        UI.text("Income", 16, FontWeight.w600, UI.white)
+                        Text(
+                          "Income",
+                          style: UI.textStyle(16, UI.white, FontWeight.w600),
+                        ),
                       ],
                     ),
                     "1840",
-                    20),
+                    20,
+                    padding: 5),
                 cardItem(
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Container(
-                        width: 24,
-                        height: 24,
-                        margin: const EdgeInsets.only(right: 6),
-                        child: Icon(Ionicons.arrow_up_outline,
-                            size: 20, color: UI.white),
-                      ),
-                      UI.text("Expenses", 16, FontWeight.w600, UI.white)
-                    ],
-                  ),
-                  "284",
-                  20,
-                ),
+                    Row(
+                      children: [
+                        Container(
+                          width: 30,
+                          height: 30,
+                          margin: const EdgeInsets.only(right: 6),
+                          child: Icon(Ionicons.arrow_up_circle,
+                              size: 28, color: Colors.white.withOpacity(0.2)),
+                        ),
+                        UI.text("Expenses", 16, FontWeight.w600, UI.white)
+                      ],
+                    ),
+                    "284",
+                    20,
+                    padding: 5),
               ],
             ),
           ],
@@ -183,11 +194,9 @@ class HomePage extends StatelessWidget {
                   UI.text("Good afternoon,", 14, FontWeight.w500, UI.white),
                   const SizedBox(height: 4),
                   UI.text("Enjelin Morgeana", 20, FontWeight.w600, UI.white),
-                  //TODO: firebase get username
                 ],
               ),
             ),
-            //TODO: notifcation button
             SizedBox(
               width: 40,
               height: 40,
@@ -214,7 +223,6 @@ class HomePage extends StatelessWidget {
               children: [
                 card(),
                 title("Transactions History"),
-                //TODO : firebase list eer guigene
                 Obx(() => ctrl.transactions.isNotEmpty
                     ? Column(
                         children: ctrl.transactions

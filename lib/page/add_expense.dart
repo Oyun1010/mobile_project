@@ -1,10 +1,14 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:dropdown_button2/dropdown_button2.dart';
 import '../theme.dart';
 
 class AddExpenseController extends GetxController {
   RxBool showClear = false.obs;
+  RxString selected = "".obs;
 }
 
 class AddExpense extends StatelessWidget {
@@ -54,12 +58,50 @@ class AddExpense extends StatelessWidget {
     );
   }
 
+  // List<String> list = <String>['One', 'Two', 'Three', 'Four'];
+  // Widget dropdown() {
+  //   ctrl.selected.value = list[0];
+  //   return Container(
+  //     width: 318,
+  //     height: 48,
+  //     decoration: BoxDecoration(
+  //         border: Border.all(color: UI.grey),
+  //         borderRadius: BorderRadius.circular(8)),
+  //     padding: const EdgeInsets.symmetric(horizontal: 12),
+  //     child: DropdownButton<String>(
+  //         value: ctrl.selected.value,
+  //         icon: const Icon(Icons.arrow_downward),
+  //         elevation: 16,
+  //         style: const TextStyle(color: Colors.deepPurple),
+  //         onChanged: (String? value) {
+  //           ctrl.selected.value = value!;
+  //         },
+  //         underline: null,
+  //         items: list.map<DropdownMenuItem<String>>((String value) {
+  //           return DropdownMenuItem<String>(
+  //             value: value,
+  //             child: Text(value),
+  //           );
+  //         }).toList(),
+  //         selectedItemBuilder: (context) => [
+  //               Container(
+  //                 width: 260,
+  //                 child: Text(
+  //                   ctrl.selected.value,
+  //                   style: UI.textStyle(16, UI.secondary, FontWeight.bold),
+  //                 ),
+  //               )
+  //             ]),
+  //   );
+  // }
+
   @override
   Widget build(BuildContext context) {
     Widget child() {
       return Column(
         children: [
           title("NAME"),
+          // dropdown(),
           textFeild(
             amount,
             "Name",
@@ -117,19 +159,6 @@ class AddExpense extends StatelessWidget {
       );
     }
 
-    // return SingleChildScrollView(
-    //   child: Container(
-    //     color: UI.white,
-    //     child: Stack(
-    //       children: [
-    //         UI.topBackground(),
-    //         UI.headerWidget(
-    //             context, "Add Expense", Ionicons.ellipsis_horizontal),
-    //         body(),
-    //       ],
-    //     ),
-    //   ),
-    // );
     return UI.screen(
         context,
         UI.headerWidget(context, "Add Expense", Ionicons.ellipsis_horizontal),
